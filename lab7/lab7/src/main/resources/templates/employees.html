@@ -46,8 +46,8 @@
                 <tr th:each="employee,iterStat : ${employees}" th:class="${iterStat.odd}? 'odd'">
                     <td th:text="${iterStat.count}"></td>
                     <td th:text="|${employee.firstName} ${employee.lastName}|"></td>
-                    <td th:text="${employee.salary}"></td>
-                    <td></td>
+                    <td th:text="${employee.jobTitle}"></td>
+                    <td th:text="${#numbers.formatDecimal(employee.salary,0,'WHITESPACE',2,'POINT')}"></td>
                     <td></td>
                     <td></td>
                     <td></td>
