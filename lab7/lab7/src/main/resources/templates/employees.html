@@ -43,18 +43,28 @@
                     <th>Uwagi</th>
                     <th>Zdjęcie</th>
                 </tr>
-                <tr th:each="employee,iterStat : ${employees}" th:class="${iterStat.odd}? 'odd'">
+                <tr th:each="employee,iterStat : ${employees}" th:class="(${employee.dateOfTermination}) ? 'fired'">
                     <td th:text="${iterStat.count}"></td>
                     <td th:text="|${employee.firstName} ${employee.lastName}|"></td>
                     <td th:text="${employee.jobTitle}"></td>
                     <td th:text="${#numbers.formatDecimal(employee.salary,0,'WHITESPACE',2,'POINT')}"></td>
                     <td th:text="${#dates.format(employee.dateOfEmployment, 'dd.MM.yyyy')}"></td>
                     <td th:text="${#dates.format(employee.dateOfTermination, 'dd.MM.yyyy')}" th:if="${employee.dateOfTermination!=null}"> </td>
-                    <td th:if="${employee.dateOfTermination==null}"> Wciąż pracuje </td>
-                    
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td th:if="${employee.dateOfTermination==null}"> Wciąż pracuje </td>      
+                    <td>
+                        <p th:each ="skill,iterStat : ${employee.skills}">
+                            <span th:text="|${skill.name} (${skill.level})|" th:if ="${iterStat.last==true}"> </span> 
+                            <span th:text="|${skill.name} (${skill.level}),|" th:if ="${iterStat.last==false}"> </span> 
+                        </p>    
+                    </td>
+                    <td>
+                        <p th:each="comment : ${employee.comments}">
+                            <span th:text="${comment}"> </span>
+                        </p>
+                    </td>
+                    <td>
+                        <img th:src="${employee.photoUrl}" class="empPhoto"/>
+                    </td>
                 </tr>
             </table>
         </div>
