@@ -52,15 +52,10 @@
                     <td th:text="${#dates.format(employee.dateOfTermination, 'dd.MM.yyyy')}" th:if="${employee.dateOfTermination!=null}"> </td>
                     <td th:if="${employee.dateOfTermination==null}"> Wciąż pracuje </td>      
                     <td>
-                        <div th:each ="skill,iterStat : ${employee.skills}">
-                            <p th:text="|${skill.name} (${skill.level})|" th:if ="${iterStat.last==true}"> </p> 
-                            <p th:text="|${skill.name} (${skill.level}),|" th:if ="${iterStat.last==false}"> </p> 
-                        </div>    
+                        <p th:each ="skill,iterStat : ${employee.skills}" th:text="(${iterStat.last}) ? |${skill.name} (${skill.level})| : |${skill.name} (${skill.level}),|"> </p>  
                     </td>
                     <td>
-                        <p th:each="comment : ${employee.comments}">
-                            <span th:text="${comment}"> </span>
-                        </p>
+                        <p th:each="comment : ${employee.comments}" th:text="${comment}"> </p>  
                     </td>
                     <td>
                         <img th:src="${employee.photoUrl}" class="empPhoto"/>
